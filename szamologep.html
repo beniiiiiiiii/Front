@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>szamologep</title>
+  </head>
+  <body>
+    <form action="">
+      <label for="num1">adjon meg egy számot: </label>
+      <input type="number" name="num1" id="num1" /> \<br />
+      <label for="num2">adjon meg egy számot: </label>
+      <input type="number" name="num2" id="num2" />\<br />
+      <label for="options">valasszon muveletet</label>
+      <select name="muveletek" id="muveletek">
+        <option value="add">+</option>
+        <option value="sub">-</option>
+        <option value="multi">*</option>
+        <option value="divide">/</option>
+      </select>
+      <label for="szamitas">Szamitas</label>
+      <input type="button" name="szamitas" id="szamitas" />
+
+      <div id="result"></div>
+    </form>
+
+    <script>
+      function Caluclate() {
+        num1 = parseInt(document.getElementById("num1").value);
+        num2 = parseInt(document.getElementById("num2").value);
+        selection = document.getElementById("muveletek").value;
+        result = 0;
+
+        if (selection.value === "add") {
+          result = num1 + num2;
+        } else if (selection.value === "sub") {
+          if (num1 > num2) {
+            result = num1 - num2;
+          } else if (num2 > num1) {
+            result = num2 - num1;
+          } else {
+            result = 0;
+          }
+        } else if (selection.value === "multi") {
+          result = num1 * num2;
+        } else {
+          result = num1 / num2;
+        }
+        document.getElementById("result").innerHTML = result;
+      }
+
+      document.getElementById("szamitas").addEventListener("click", Caluclate);
+    </script>
+  </body>
+</html>

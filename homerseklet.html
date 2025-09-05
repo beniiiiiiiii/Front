@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>atvalto</title>
+  </head>
+  <body>
+    <form action="bevitel">
+      <label for="bevitel">Adja meg a hőmérsékletet: </label>
+      <input type="number" name="ho" id="ho" />
+      <label for="szamitas">Szamitas</label>
+      <input type="button" name="szamitas" id="szamitas" />
+
+      <div id="kelvin"></div>
+      <div id="fahren"></div>
+    </form>
+
+    <script>
+      let ho = document.getElementById("ho");
+      let kelvin = 0;
+      let fahren = 0;
+
+      function Caluclate() {
+        kelvin = ho.value + 273.15;
+        fahren = ho.value * 1.8 + 32;
+
+        document.getElementById("kelvin").innerHTML = kelvin;
+        document.getElementById("fahren").innerHTML = fahren;
+      }
+      document.getElementById("szamitas").addEventListener("click", Caluclate);
+    </script>
+  </body>
+</html>
