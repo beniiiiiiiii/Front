@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bmi</title>
+  </head>
+  <body>
+    <form action="">
+      <label for="weight">Adja meg a testsúlyát: </label>
+      <input type="number" name="weight" id="weight" />
+      <label for="height">Adja meg a magasságát: </label>
+      <input type="number" name="height" id="height" />
+      <label for="szamitas">Számítás</label>
+      <input type="button" name="szamitas" id="szamitas" /> <br />
+
+      <div id="bmi"></div>
+      <div id="result"></div>
+    </form>
+
+    <script>
+      function Caluclate() {
+        let weight = parseInt(document.getElementById("weight").value);
+        let height = parseInt(document.getElementById("height").value) / 100;
+        let bmi = weight / (height * height);
+        document.getElementById("bmi").innerHTML =
+          "Az ön BMI értéke: " + bmi.toFixed(2);
+
+        if (bmi < 18.5) {
+          document.getElementById("result").innerHTML = "Ön sovány";
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+          document.getElementById("result").innerHTML = "Ön normál súlyú";
+        } else if (bmi >= 25 && bmi < 29.9) {
+          document.getElementById("result").innerHTML = "Ön túlsúlyos";
+        } else {
+          document.getElementById("result").innerHTML = "Ön elhízott";
+        }
+      }
+
+      document.getElementById("szamitas").addEventListener("click", Caluclate);
+    </script>
+  </body>
+</html>
