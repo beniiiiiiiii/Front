@@ -18,38 +18,55 @@
         <option value="multi">*</option>
         <option value="divide">/</option>
       </select>
-      <label for="szamitas">Szamitas</label>
-      <input type="button" name="szamitas" id="szamitas" />
+      <button id="szamitas">Számítás</button>
 
       <div id="result"></div>
     </form>
 
     <script>
-      function Caluclate() {
-        num1 = parseInt(document.getElementById("num1").value);
-        num2 = parseInt(document.getElementById("num2").value);
-        selection = document.getElementById("muveletek").value;
-        result = 0;
-
-        if (selection.value === "add") {
-          result = num1 + num2;
-        } else if (selection.value === "sub") {
-          if (num1 > num2) {
-            result = num1 - num2;
-          } else if (num2 > num1) {
-            result = num2 - num1;
-          } else {
-            result = 0;
-          }
-        } else if (selection.value === "multi") {
-          result = num1 * num2;
-        } else {
-          result = num1 / num2;
-        }
-        document.getElementById("result").innerHTML = result;
+      if (localStorage.getItem("szám1") && localStorage.getItem("szám2")) {
+        document.getElementById("num1").value = localStorage.getItem("szám1");
+        document.getElementById("num2").value = localStorage.getItem("szám2");
+        document.getElementById("muveletek").value =
+          localStorage.getItem("selection");
+        document.getElementById("result").textContent =
+          localStorage.getItem("result");
       }
+      document
+        .getElementById("szamitas")
+        .addEventListener("click", function () {
+          const ertek1 = Number(document.getElementById("num1").value);
+          const ertek2 = Number(document.getElementById("num2").value);
+          const selection = document.getElementById("muveletek").value;
+          localStorage.setItem("szám1", ertek1);
+          localStorage.setItem("szám2", ertek2);
+          localStorage.setItem("selection", selection);
+          result = 0;
 
-      document.getElementById("szamitas").addEventListener("click", Caluclate);
+          switch (selection) {
+            case "add":
+              result = ertek1 + ertek2;
+              break;
+            case "sub" && ertek1 > ertek2:
+              result = ertek1 - ertek2;
+              break;
+            case "sub" && ertek2 > ertek1:
+              result = ertek2 - ertek1;
+              break;
+            case "multi":
+              result = ertek1 * ertek2;
+              break;
+            case "divide" && ertek1 > ertek2:
+              result = ertek1 / ertek2;
+              break;
+            case "divide" && ertek2 > ertek1:
+              result = ertek2 / ertek1;
+              break;
+          }
+          localStorage.setItem("result", result);
+
+          document.getElementById("result").textContent = result.value;
+        });
     </script>
   </body>
 </html>

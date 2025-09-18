@@ -1,41 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>exchange</title>
-</head>
-<body>
-    <form action="">
-        <label for="forint">adja meg a pénzt forintba</label>
-        <input type="number" name="forint" id="forint">
-        <label for="currency">valasszon penznemet</label>
-        <select name="currency" id="currency">
-            <option value="euro">euro</option>
-            <option value="dollar">dollar</option>
-        <select/>
-        <label for="szamitas">Szamitas</label>
-        <input type="button" name="szamitas" id="szamitas">
-    </form>
-
-    <div id="result"></div>
-
+  </head>
+  <body>
+    <input type="number" id="szam" min="1" />
+    <button id="atvalt">Átvált</button>
     <script>
-        function Caluclate() {
-            let num1 = parseInt(document.getElementById("forint").value);
-            let selection = document.getElementById("currency").value;
-            let result = 0;
+      if (localStorage.getItem("szám")) {
+        document.getElementById("szam").value = localStorage.getItem("szám");
+      }
 
-            if (selection === "euro") {
-                result = num1 / 370;
-            } else {
-                result = num1 / 350;
-            }
-
-            document.getElementById("result").innerHTML = result.toFixed(2);
-        }
-
-        document.getElementById("szamitas").addEventListener("click", Caluclate);
+      document.getElementById("atvalt").addEventListener("click", () => {
+        alert("átvált");
+        const ertek = Number(document.getElementById("szam").value);
+        localStorage.setItem("szám", ertek);
+      });
     </script>
-</body>
+  </body>
 </html>

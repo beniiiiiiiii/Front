@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Névnap kereső</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 40px;
+        }
+        #container {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            background: #0078d7;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 16px;
+            color: #333;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>Névnap kereső</h2>
+        <input type="text" id="nameInput" placeholder="Írd be a keresett nevet...">
+        <button onclick="searchName()">Keresés</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        const namedays = {
+            "Anna": "Július 26.",
+            "Gábor": "Március 24.",
+            "János": "Június 24.",
+            "Erika": "Augusztus 31.",
+            "Bence": "Március 16.",
+            "Zoltán": "Március 8.",
+            "Katalin": "November 25."
+        };
+
+        function searchName() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (name) {
+                localStorage.setItem('lastNameSearch', name);
+                if (namedays[name]) {
+                    document.getElementById('result').innerText = `${name} névnapja: ${namedays[name]}`;
+                } else {
+                    document.getElementById('result').innerText = `Nincs adat a(z) "${name}" névnapjáról.`;
+                }
+            }
+        }
+
+        window.onload = function() {
+            const last = localStorage.getItem('lastNameSearch');
+            if (last) {
+                document.getElementById('nameInput').value = last;
+                if (namedays[last]) {
+                    document.getElementById('result').innerText = `${last} névnapja: ${namedays[last]}`;
+                } else {
+                    document.getElementById('result').innerText = `Nincs adat a(z) "${last}" névnapjáról.`;
+                }
+            }
+        };
+    </script>
+</body>
+</html>
